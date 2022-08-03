@@ -61,12 +61,12 @@ var displayWeather = function(weather, searchCity){
    temperatureEl.textContent = "Temperature: " + weather.main.temp + " °F";
    temperatureEl.classList = "list-group-item"
   
-   //create a span element to hold Humidity data
+   //create a span element to hold humidity data
    var humidityEl = document.createElement("span");
    humidityEl.textContent = "Humidity: " + weather.main.humidity + " %";
    humidityEl.classList = "list-group-item"
 
-   //create a span element to hold Wind data
+   //create a span element to hold wind data
    var windSpeedEl = document.createElement("span");
    windSpeedEl.textContent = "Wind Speed: " + weather.wind.speed + " MPH";
    windSpeedEl.classList = "list-group-item"
@@ -86,17 +86,14 @@ var displayWeather = function(weather, searchCity){
 }
 
 var getUvIndex = function(lat,lon){
-    var apiKey = "844421298d794574c100e3409cee0499"
+    var apiKey = "72cdf6c3d5c12287752981bf2a87cd9d"
     var apiURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
     fetch(apiURL)
     .then(function(response){
         response.json().then(function(data){
             displayUvIndex(data)
-           // console.log(data)
         });
     });
-    //console.log(lat);
-    //console.log(lon);
 }
  
 var displayUvIndex = function(index){
@@ -123,7 +120,7 @@ var displayUvIndex = function(index){
 }
 
 var get5Day = function(city){
-    var apiKey = "844421298d794574c100e3409cee0499"
+    var apiKey = "72cdf6c3d5c12287752981bf2a87cd9d"
     var apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`
 
     fetch(apiURL)
@@ -145,8 +142,6 @@ var display5Day = function(weather){
        
        var forecastEl=document.createElement("div");
        forecastEl.classList = "card bg-primary text-light m-2";
-
-       //console.log(dailyForecast)
 
        //create date element
        var forecastDate = document.createElement("h5")
@@ -171,6 +166,15 @@ var display5Day = function(weather){
         //append to forecast card
         forecastEl.appendChild(forecastTempEl);
 
+        // //create wind span
+        // var forecastWindEl=document.createElement("span");
+        // forecastWindEl.classList = "card-body text-center";
+        // forecastWindEl.textContent = dailyForecast.main.wind_speed + " MPH";
+        
+        // //append to forecast card
+        // forecastWindEl.appendChild(forecastWindEl);
+
+        //create humidity span
        var forecastHumEl=document.createElement("span");
        forecastHumEl.classList = "card-body text-center";
        forecastHumEl.textContent = dailyForecast.main.humidity + "  %";
@@ -178,7 +182,6 @@ var display5Day = function(weather){
        //append to forecast card
        forecastEl.appendChild(forecastHumEl);
 
-        // console.log(forecastEl);
        //append to five day container
         forecastContainerEl.appendChild(forecastEl);
     }
@@ -186,8 +189,6 @@ var display5Day = function(weather){
 }
 
 var pastSearch = function(pastSearch){
- 
-    // console.log(pastSearch)
 
     pastSearchEl = document.createElement("button");
     pastSearchEl.textContent = pastSearch;
@@ -206,8 +207,6 @@ var pastSearchHandler = function(event){
         get5Day(city);
     }
 }
-
-// pastSearch();
 
 cityFormEl.addEventListener("submit", formSumbitHandler);
 pastSearchButtonEl.addEventListener("click", pastSearchHandler);

@@ -7,7 +7,7 @@
     border: none;
 }
 .card-body{
-    flex:auto
+    flex: auto;
 }
 
 span.severe{
